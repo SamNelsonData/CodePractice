@@ -57,13 +57,21 @@ class LinkedList {
 		};
 
 		void addElement(T element) {
-			Node<T> new_node = Node<T>(element);
-
-			++this->size;
+			Node<T>* new_node = new Node<T>(element);
+			if (this->size == 0) {
+				this->head = new_node;
+				this->current = new_node;
+				this->tail = new_node;
+				++this->size;
+			}
+			else {
+				this->tail->setChild(new_node);
+				this->tail = new_node;
+				++this->size;
+			}
 		};
 
 		T getHead() {
-			print(this->current);
 			this->current = this->head;
 			return this->head->getElement();
 		};
@@ -75,8 +83,6 @@ class LinkedList {
 			delete temp;
 			--this->size;
 		};
-
-
 };
 
 int main() {
@@ -99,6 +105,19 @@ int main() {
 	print(temp2.next->getElement());
 	print(temp1.next->next->getElement());
 
+	print("--------");
+
+	print("--------");
+
+	LinkedList<int> test_list = LinkedList<int>();
+	test_list.addElement(1);
+	test_list.addElement(2);
+	
+	print(test_list.getElement());
+
+	test_list.increment();
+
+	print(test_list.getElement());
 
 }
 

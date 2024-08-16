@@ -34,8 +34,9 @@ class LinkedList {
 		Node<T>* head;
 		Node<T>* current;
 		Node<T>* tail;
-		int size;
 	public:
+	
+		int size;
 
 		// Constructor
 		LinkedList() {
@@ -80,9 +81,10 @@ class LinkedList {
 			Node<T>* temp = this->head;
 			this->head = temp->next;
 			delete this->head;
-			delete temp;
 			--this->size;
+			return temp->getElement();
 		};
+		
 };
 
 int main() {
@@ -112,14 +114,30 @@ int main() {
 	LinkedList<int> test_list = LinkedList<int>();
 	test_list.addElement(1);
 	test_list.addElement(2);
+	test_list.addElement(3);
+	test_list.addElement(4);
 	
 	print(test_list.getElement());
 
 	test_list.increment();
 
 	print(test_list.getElement());
+	
+	test_list.increment();
+	test_list.increment();
+	
+	print(test_list.getElement());
+	
+	print(test_list.size);
+	
+	print(test_list.pop());
+	
+	print(test_list.size);
+	
+	test_list.addElement(42);
+	test_list.addElement(111);
+	test_list.addElement(666);
+	
+	test_list.getHead();
 
 }
-
-
-

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 template <typename T>
 void print(T a) {
@@ -78,13 +79,17 @@ class LinkedList {
 		};
 
 		T pop() {
-			T temp = this->head->getElement();
+			T element = this->head->getElement();
+			Node<T>* temp = this->head;
 			this->head = this->head->next;
-			delete this->next;
+			delete temp;
 			--this->size;
-			return temp;
+			return element;
 		};
 		
+		std::ostream& operator<<(std::ostream& os) {
+		    
+		}
 };
 
 int main() {
@@ -120,11 +125,5 @@ int main() {
 	test_list.addElement(42);
 	test_list.addElement(111);
 	test_list.addElement(666);
-	
-	print(test_list.getHead());
-
-	print(test_list.pop());
-
-	print(test_list.getHead());
 	
 }

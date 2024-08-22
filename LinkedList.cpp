@@ -54,7 +54,7 @@ class LinkedList {
 			this->current = this->current->next;
 		};
 
-		T getElement() {
+		T getElement() const {
 			return this->current->getElement();
 		};
 
@@ -73,10 +73,13 @@ class LinkedList {
 			}
 		};
 
-		T getHead() {
+		void reset() {
 			this->current = this->head;
-			return this->head->getElement();
 		};
+		
+		Node<T>* getHead() const {
+		    return this->head;
+		}
 
 		T pop() {
 			T element = this->head->getElement();
@@ -86,10 +89,23 @@ class LinkedList {
 			--this->size;
 			return element;
 		};
-		
-		std::ostream& operator<<(std::ostream& os) {
+    
+        // AAUGSHSF WHY WON'T THIS WORK??!!?!
+		friend std::ostream& operator<<(std::ostream& os, LinkedList const & LL) {
+		    if(LL.size == 0) {
+		        return os << "[]";
+		    }
+		    std::string str_rep = "[";
+		    Node<T>* TN = LL.getHead(); //traversal node
+		    str_rep = str_rep + std::to_string(TN->getElement()) + ", ";
 		    
-		}
+		    while(TN->next != NULL) {
+		        TN = TN->next;
+		        str_rep = str_rep + std::to_string(TN->getElement()) + ", ";
+		    }
+		    str_rep.erase(str_rep.end() - 2, str_rep.end());
+		    return os << str_rep + "]";
+		}		
 };
 
 int main() {
@@ -126,4 +142,5 @@ int main() {
 	test_list.addElement(111);
 	test_list.addElement(666);
 	
+	std::cout << test_list << std::endl;
 }

@@ -78,11 +78,11 @@ class LinkedList {
 		};
 
 		T pop() {
-			Node<T>* temp = this->head;
-			this->head = temp->next;
-			delete this->head;
+			T temp = this->head->getElement();
+			this->head = this->head->next;
+			delete this->next;
 			--this->size;
-			return temp->getElement();
+			return temp;
 		};
 		
 };
@@ -116,28 +116,15 @@ int main() {
 	test_list.addElement(2);
 	test_list.addElement(3);
 	test_list.addElement(4);
-	
-	print(test_list.getElement());
 
-	test_list.increment();
-
-	print(test_list.getElement());
-	
-	test_list.increment();
-	test_list.increment();
-	
-	print(test_list.getElement());
-	
-	print(test_list.size);
-	
-	print(test_list.pop());
-	
-	print(test_list.size);
-	
 	test_list.addElement(42);
 	test_list.addElement(111);
 	test_list.addElement(666);
 	
-	test_list.getHead();
+	print(test_list.getHead());
 
+	print(test_list.pop());
+
+	print(test_list.getHead());
+	
 }

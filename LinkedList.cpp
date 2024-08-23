@@ -143,4 +143,6 @@ int main() {
 	test_list.addElement(666);
 	
 	std::cout << test_list << std::endl;
+
+	print("hello fuckin' git hub motherfucker");
 }

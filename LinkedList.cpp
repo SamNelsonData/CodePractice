@@ -90,7 +90,6 @@ class LinkedList {
 			return element;
 		};
     
-        // AAUGSHSF WHY WON'T THIS WORK??!!?!
 		friend std::ostream& operator<<(std::ostream& os, LinkedList const & LL) {
 		    if(LL.size == 0) {
 		        return os << "[]";
@@ -105,7 +104,8 @@ class LinkedList {
 		    }
 		    str_rep.erase(str_rep.end() - 2, str_rep.end());
 		    return os << str_rep + "]";
-		}		
+		}
+
 };
 
 int main() {
@@ -143,6 +143,4 @@ int main() {
 	test_list.addElement(666);
 	
 	std::cout << test_list << std::endl;
-
-	print("hello fuckin' git hub motherfucker");
 }

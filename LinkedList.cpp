@@ -1,3 +1,6 @@
+// My favorite custom iterator tutorial so far:
+// https://www.internalpointers.com/post/writing-custom-iterators-modern-cpp
+
 #include <iostream>
 #include <string>
 
@@ -105,23 +108,15 @@ class LinkedList {
 		    str_rep.erase(str_rep.end() - 2, str_rep.end());
 		    return os << str_rep + "]";
 		}
-		
-		Iterator begin() {
-		    return Iterator(this->head);
-		}
-		
-		Iterator end() {
-		    return Iterator(this->tail->next);
-		}
 
         struct Iterator {
             
             // Constructor
-            Iterator(Node* node_ptr) : current(node_ptr) {}
+            Iterator(Node<T>* node_ptr) : current(node_ptr) {}
             
             // De-reference operator overrides
-            T operator*() { return this->current->getElement()};
-            Node* operator->() { return this->current;};
+            T operator*() { return this->current->getElement();};
+            Node<T>* operator->() { return this->current;};
             
             // Pre-fix operator overload
             Iterator& operator++() {
@@ -130,9 +125,14 @@ class LinkedList {
             };
             
             // Post-fix operator overload
+			Iterator operator++(int) {
+				Iterator temp = *this;
+				++(*this);
+				return temp;
+			};
             
             private:
-                Node* current;
+                Node<T>* current;
         };
 
 };

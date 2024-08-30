@@ -16,7 +16,7 @@ template <typename T> class Node {
 		// constructor
         Node(T element) {
             this->element = element;
-			this->next = NULL;
+			this->next = nullptr;
         };
         
 		// getter for the node element
@@ -105,6 +105,35 @@ class LinkedList {
 		    str_rep.erase(str_rep.end() - 2, str_rep.end());
 		    return os << str_rep + "]";
 		}
+		
+		Iterator begin() {
+		    return Iterator(this->head);
+		}
+		
+		Iterator end() {
+		    return Iterator(this->tail->next);
+		}
+
+        struct Iterator {
+            
+            // Constructor
+            Iterator(Node* node_ptr) : current(node_ptr) {}
+            
+            // De-reference operator overrides
+            T operator*() { return this->current->getElement()};
+            Node* operator->() { return this->current;};
+            
+            // Pre-fix operator overload
+            Iterator& operator++() {
+                this->current = this->current->next;
+                return *this;
+            };
+            
+            // Post-fix operator overload
+            
+            private:
+                Node* current;
+        };
 
 };
 

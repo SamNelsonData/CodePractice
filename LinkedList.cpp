@@ -113,22 +113,6 @@ int main() {
 	int* b = &a;
 	print(b);
 	print(*b);
-	
-	print("--------");
-
-	Node<int> temp1 = Node<int>(5);
-	Node<int> temp2 = Node<int>(30);
-	Node<int> temp3 = Node<int>(42);
-
-	temp1.next = &temp2;
-	temp2.setChild(&temp3);
-
-	print(temp1.getElement());
-	print(temp1.next->getElement());
-	print(temp2.next->getElement());
-	print(temp1.next->next->getElement());
-
-	print("--------");
 
 	print("--------");
 

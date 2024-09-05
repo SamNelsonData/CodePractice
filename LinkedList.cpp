@@ -130,10 +130,26 @@ class LinkedList {
 				++(*this);
 				return temp;
 			};
+			
+			bool operator==(Iterator& a) {
+			    return this->current == a.current;
+			}
+			
+			bool operator!=(Iterator& a) {
+			    return this->current != a.current;
+			}
             
             private:
                 Node<T>* current;
         };
+
+        Iterator begin() {
+            return Iterator(this->head);
+        }
+        
+        Iterator end() {
+            return Iterator(this->tail->next);
+        }
 
 };
 
@@ -155,5 +171,7 @@ int main() {
 	test_list.addElement(111);
 	test_list.addElement(666);
 	
-	std::cout << test_list << std::endl;
+	for (auto i : test_list) {
+	    std::cout << i << std::endl;
+	}
 }

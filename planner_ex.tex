@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{comment}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{tikz}
+\usepackage{rotating}
+\usepackage{datetime}
+
+\usepackage[letterpaper, landscape, total={11in, 8.5in}]{geometry}
+\thispagestyle{empty}
+
+\definecolor{sketch}{HTML}{B8BAC8}
+\definecolor{light_line}{HTML}{666666}
+
+\def\daystart{7.75}
+\def\daystep{4.2}
+
+\usepackage{pgffor}
+
+\newcommand\name{}\long\def\name#1#{\romannumeral0\innername{#1}}%
+\newcommand\innername[2]{%
+  \expandafter\exchange\expandafter{\csname #2\endcsname}{0 #1}%
+}%
+\newcommand\exchange[2]{#2#1}
+
+\foreach \day in {0,1,...,3}{
+   \name\newcommand*{daynames[\day]}{}
+   \name\name\global\let{daynames[\day]}={daynames[\day]}%
+}
+
+\newdate{date}{16}{09}{2024}
+
+\begin{document}
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tikzpicture}
+            % make box
+            %     upper left    upper right  lower right   lower left
+            \draw[color=white] (-11, 8.5) -- (11, 8.5) -- (11, -8.5) -- (-11, -8.5) -- cycle;
+    
+            % mark center
+            \draw[color=sketch] (0, 8.5) -- (0, -8.5);
+    
+            % left side
+            \name\renewcommand*{daynames[0]}{Monday}
+            \name\renewcommand*{daynames[1]}{Tuesday}
+            \name\renewcommand*{daynames[2]}{Wednesday}
+            \name\renewcommand*{daynames[3]}{Notes}
+
+            \foreach \day in {0,1,2,3} {
+                \draw (-10.35, \daystart - \day*\daystep) -- (-0.15, \daystart - \day*\daystep);
+                
+                % writing lines
+                \foreach \note in {1,2,...,7} {
+                    \draw[color=light_line] (-9.6, \daystart - \day*\daystep - 0.5*\note) -- (-0.15, \daystart - \day*\daystep - 0.5*\note);
+                }
+                \draw[anchor=west] (-9.35 - 1, \daystart - \day*\daystep + .2) node {\name{daynames[\day]}};
+                
+                \draw[anchor=west] (-9.35 - 1 + 2, \daystart - \day*\daystep + .2) node {\displaydate{date}};
+            }
+            
+            % right side
+            \name\renewcommand*{daynames[0]}{Thursday}
+            \name\renewcommand*{daynames[1]}{Friday}
+            \name\renewcommand*{daynames[2]}{Saturday}
+            \name\renewcommand*{daynames[3]}{Sunday}
+
+            \foreach \day in {0,1,2,3} {
+                \draw (0.65, \daystart - \day*\daystep) -- (10.85, \daystart - \day*\daystep);
+                % writing lines
+                \foreach \note in {1,2,...,7} {
+                    \draw[color=light_line] (1.15, \daystart - \day*\daystep - 0.5*\note) -- (10.85, \daystart - \day*\daystep - 0.5*\note);
+                }
+                \draw[anchor=west] (1.65 - 1, \daystart - \day*\daystep + .2) node {\name{daynames[\day]}};
+            }
+
+        \end{tikzpicture}
+    }
+\end{document}
